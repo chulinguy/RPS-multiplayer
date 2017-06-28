@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock-Paper-Scissors</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h2 class="text-center">Rock-Paper-Scissors</h2>
+      <h4 class="text-center">"Just in case you got bored playing against the computer"</h4>
+    </div>
+
+    <div id='username'>
+      <form>
+        <div class="form-group row">
+          <div class='col-xs-9'>
+            <label for="user-name">Your Name</label>
+            <input class="form-control" id="user-name" type="text">
+          </div>
+          <div class='col-xs-3'>
+            <button class="btn btn-primary" id="submit-name" type="submit">Start</button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+
+    <div class='row center-block' id='languages'>
+    </div>
+
+    <div id='chat'>
+      <div id='chat-window'>
+
+      </div>
+      <form>
+        <div class="form-group row">
+          <div class='col-xs-9'>
+            <input class="form-control" id="chat-type" type="text">
+          </div>
+          <div class='col-xs-3'>
+            <button class="btn btn-primary" id="submit-chat" type="submit">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Script -->
+  <script src="assets/javascript/app.js"></script>
+
+</body>
+
+</html>

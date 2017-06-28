@@ -1,0 +1,16 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+div {
+  outline: 1px solid red; 
+}
+
+#chat {
+  display: none;
+}
+
+#chat-window {
+  min-height: 150px; 
+  width: 75%;
+}
