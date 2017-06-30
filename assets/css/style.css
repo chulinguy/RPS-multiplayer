@@ -5,6 +5,22 @@
 div {
   outline: 1px solid red; 
 }
+img {
+  max-height: 150px; 
+  width: auto;
+}
+
+.myself {
+  color: purple
+}
+
+.others {
+  color: blue
+}
+
+.jumbotron {
+  padding: 20px;
+}
 
 #chat {
   display: none;
@@ -13,4 +29,8 @@ div {
 #chat-window {
   min-height: 150px; 
   width: 75%;
+}
+
+#funStuff {
+  display: none;
 }
