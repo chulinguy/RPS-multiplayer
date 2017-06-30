@@ -2,9 +2,9 @@
     display: none;
 }
 
-div {
+/*div {
   outline: 1px solid red; 
-}
+}*/
 img {
   max-height: 150px; 
   width: auto;
@@ -30,6 +30,14 @@ img {
 .choice {
   width: 33.3%
 }
+
+.col-xs-3, .col-xs-9 {
+  min-height: 60px;
+  position: relative;  
+}
+
+
+
 #langDiv {
   width: auto;
 }
@@ -41,8 +49,18 @@ img {
 #chat-window {
   min-height: 150px; 
   width: 75%;
+  border: 1px solid lightgray
 }
 
 #funStuff {
   display: none;
+}
+
+#submit-name, #submit-chat, #chat-type {
+  position: absolute;
+  bottom: 0;
+}
+
+#chat-type{
+  width: 100%;
 }
