@@ -22,6 +22,18 @@ img {
   padding: 20px;
 }
 
+.btn-primary {
+  min-height: 50px;
+  min-width: 100px;
+}
+
+.choice {
+  width: 33.3%
+}
+#langDiv {
+  width: auto;
+}
+
 #chat {
   display: none;
 }

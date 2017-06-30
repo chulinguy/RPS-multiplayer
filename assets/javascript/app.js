@@ -153,9 +153,13 @@ app.render = function () {
   console.log('rendering game');
   $('#user-name').val('') ; 
   $('#languages').empty();
-  $('#languages').append(`<button class='btn-primary choice' id='rock'>${that.languages[that.chosenLang].rock}</button>`)
-  $('#languages').append(`<button class='btn-primary choice' id='paper'>${that.languages[that.chosenLang].paper}</button>`)
-  $('#languages').append(`<button class='btn-primary choice' id='scissors'>${that.languages[that.chosenLang].scissors}</button>`)
+  var langDiv = $('<div>'); 
+  langDiv.addClass('center-block') ;
+  langDiv.attr('id', 'langDiv');
+  langDiv.append(`<button class='btn-primary choice' id='rock'>${that.languages[that.chosenLang].rock}</button>`)
+  langDiv.append(`<button class='btn-primary choice' id='paper'>${that.languages[that.chosenLang].paper}</button>`)
+  langDiv.append(`<button class='btn-primary choice' id='scissors'>${that.languages[that.chosenLang].scissors}</button>`)
+  $('#languages').append(langDiv);
   $('#username').toggle();  
   $('#chat').toggle();
 }
@@ -233,16 +237,21 @@ DB.ref('/players').on('child_added', (snap)=>{
       app.playerNumber = 2;  
     }
   }
+  console.log('really?')
   app.playerOneExists = true;
-  if (snap.val()[2]){
-    app.playerOneExists = false;
-  }
+  console.log(snap.val())
+  
 })
 
 //event listener for when there are exactly two players
 DB.ref('/players').on('value', (snap) => {
+
   if (snap.val()) {
     console.log(snap.val())
+    if (snap.val()[2]){
+      app.playerOneExists = false;
+      console.log('please trigger!')
+    }
     if (snap.val()[1] && !app.multiplayer){
       if (snap.val()[1].name == app.playerName) {
         $('#instructions').html('Waiting for the other player');
@@ -273,7 +282,7 @@ DB.ref('/players').on('child_removed', (snap) => {
       $('#chat-window').append('<p class="warning">The other player has disconnected</p>')
       app.multiplayer = false;;  
       app.gameFull = false; 
-      
+      app.roundNumber = 1;
 })
 
 //logic for chat window: send text 
