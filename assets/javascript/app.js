@@ -6,7 +6,6 @@ app.losses = 0;
 app.chosenLang = 'English';
 app.playerNumber = 1;
 app.playerName = '';   
-app.playerOneExists = false;  
 app.gameFull = false;  
 app.multiplayer = false; 
 app.notYetChosen = true;  
@@ -118,8 +117,8 @@ app.loggedIN = function (name) {
   this.playerName = name; 
   var players = DB.ref('/players');
   
-  //if player one exists
-   if (this.playerOneExists) {
+  //be player two
+   if (this.playerNumber === 2) {
     //you are player two
     players.child(2).set(
       {
@@ -229,48 +228,48 @@ app.outcome = function(a, b) {
   DB.ref('/rounds').set(that.roundNumber)
 }
 
-//event listener for child_added in order to determine if player one exists
+//event listener for player checking
 DB.ref('/players').on('child_added', (snap)=>{
-  // console.log('IMPORTANT', snap.val())
-  if (snap.val()){
-    if (app.playerOneExists) {
-      app.playerNumber = 2;  
-    }
-  }
-  console.log('really?')
-  app.playerOneExists = true;
+  
+  console.log('child added!')
   console.log(snap.val())
   
+  
+
+  //if gmae hasn't started after a player child was added 
+  if (!app.multiplayer && snap.val()){
+    if (snap.val().name == app.playerName) {
+      $('#instructions').html('Waiting for the other player');
+    } else {
+      $('#instructions').html('The other player is waiting for you!');
+    }
+  }
 })
 
 //event listener for when there are exactly two players
 DB.ref('/players').on('value', (snap) => {
-
   if (snap.val()) {
-    console.log(snap.val())
-    if (snap.val()[2]){
-      app.playerOneExists = false;
-      console.log('please trigger!')
+    console.log('players value changed!')
+    // console.log(snap.val())
+    // if there is a player one, no player two, AND you are not player one
+    if (snap.val()[1] && !snap.val()[2] && snap.val()[1].name !== app.playerName){
+      app.playerNumber = 2;  
     }
-    if (snap.val()[1] && !app.multiplayer){
-      if (snap.val()[1].name == app.playerName) {
-        $('#instructions').html('Waiting for the other player');
-      } else {
-        $('#instructions').html('The other player is waiting for you!');
-      }
-    }
-    //if we have two players (player zero is undefined)
-    if (snap.val().length === 3 && app.multiplayer === false) {
-      console.log('game starts!')
-      app.gameStarts(snap.val()); 
-      app.multiplayer = true;  
-      app.gameFull = true; 
-    } 
+    //if there are exactly two players, run main game logic   
+    //if we have two players (player zero is undefined) 
     if (snap.val().length === 3) {
-      if (snap.val()[1].choice && snap.val()[2].choice){
-        app.outcome(snap.val()[1].choice, snap.val()[2].choice);
+      app.gameFull = true; 
+      if (app.multiplayer) {
+        if (snap.val()[1].choice && snap.val()[2].choice){
+          app.outcome(snap.val()[1].choice, snap.val()[2].choice);
+        }
+      } else {
+        console.log('game starts!')
+        app.multiplayer = true;  
+        app.gameStarts(snap.val()); 
       }
-    }
+    } 
+
   } else {
     console.log('clearing all history');
     DB.ref().remove();
@@ -322,7 +321,6 @@ $(document.body).on('click', '.choice', function() {
   if (app.notYetChosen){
     app.notYetChosen = false;  
     DB.ref(`/players/${app.playerNumber}`).child('choice').set(choice);
-    console.log('extra trigger?')
   }
 })
 
