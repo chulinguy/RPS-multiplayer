@@ -45,7 +45,7 @@ app.languages = {
     start: '開始',
     warning: '請輸入你的名字'
   },
-  'Russian': {
+  'русский язык': {
     game: 'Раз-Два-Три',
     rock:'камень',
     paper:'бумага',
