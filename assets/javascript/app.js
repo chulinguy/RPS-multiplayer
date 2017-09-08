@@ -19,7 +19,8 @@ app.languages = {
     paper: 'Feuille',
     scissors: 'Ciseaux',
     start: 'début',
-    warning: "S'il vous plaît entrez votre nom"
+    warning: "S'il vous plaît entrez votre nom",
+    yourName: 'Votre Nom'
   },
    'English': {
     game: 'Rock-Paper-Scissors',
@@ -27,7 +28,8 @@ app.languages = {
     paper: 'Paper',
     scissors: 'Scissors',
     start: 'Start',
-    warning: 'Please enter a name'
+    warning: 'Please enter a name',
+    yourName: 'Your Name'
   },
    'Español': {
     game: 'Piedra-Papel-Tijera',
@@ -35,7 +37,8 @@ app.languages = {
     paper: 'Papel',
     scissors: 'Tiejera',
     start: 'Comienzo',
-    warning: 'por favor, escriba su nombre'
+    warning: 'por favor, escriba su nombre',
+    yourName:'Tu Nombre'
   },
    '中文': {
     game: '剪刀-石頭-布',
@@ -43,7 +46,8 @@ app.languages = {
     paper:'布',
     scissors: '剪刀',
     start: '開始',
-    warning: '請輸入你的名字'
+    warning: '請輸入你的名字',
+    yourName: '你的名字'
   },
   'русский язык': {
     game: 'Раз-Два-Три',
@@ -51,7 +55,8 @@ app.languages = {
     paper:'бумага',
     scissors: 'ножницы',
     start: 'Начало',
-    warning: 'Пожалуйста, введите Ваше имя'
+    warning: 'Пожалуйста, введите Ваше имя',
+    yourName: 'ваше имя'
   }
 }
 
@@ -77,7 +82,8 @@ app.initialize = function () {
     that.chosenLang = chosenLang;
     console.log(`User chose ${chosenLang}`)
     $('#submit-name').text(that.languages[chosenLang].start);
-    $('h2').text(that.languages[chosenLang].game)
+    $('h2').text(that.languages[chosenLang].game);
+    $('label').text(that.languages[chosenLang].yourName)
   })
   //event listern for enter name
   $('#submit-name').on('click', function(e){
